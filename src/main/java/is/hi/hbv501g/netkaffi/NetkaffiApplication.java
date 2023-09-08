@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class NetkaffiApplication {
-
+//ég er að hjálpa, vonandi...
     public static void main(String[] args) {
         SpringApplication.run(NetkaffiApplication.class, args);
     }
