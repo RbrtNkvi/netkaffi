@@ -3,6 +3,9 @@ Að þessu verkefni standa:
 
 aðrir og...
 
-Víkingur Brynjar(VikingurB)
 
 Einar Þór(eti2)
+
+Róbert Nökkvi(RbrtNkvi)
+
+Víkingur Brynjar(VikingurB)
