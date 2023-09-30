@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+
+<div th:switch="${products}">
+    <h2 th:case="null">No products yet!</h2>
+    <div th:case="*">
+        <h2>Products</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <span th:if="${product.deleted == false}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.type}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td>
+                        <form action="#" th:action="@{/delete/{name}(name=${product.name})}" method="post" class="inline">
+                            <button type="submit" name="name" value="name" class="link-button">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </span>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/addproduct">Add a new product</a></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+
+<div th:switch="${product}">
+    <h2 th:case="null">No product!</h2>
+    <div th:case="*">
+        <h2>Products</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p : ${product}">
+                <span th:if="${p.deleted == false}">
+                    <td th:text="${p.name}"></td>
+                    <td th:text="${p.type}"></td>
+                    <td th:text="${p.price}"></td>
+                </span>
+                <form action="#" th:action="@{/book/{pname}(pname=${p.name})}" method="post" >
+                    <label for="time">Hour:</label>
+                    <select id="time" name="starttime" th:value="${starttime}">
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                    </select>
+                    <input type="submit">
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
