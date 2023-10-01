@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+</head>
+<body>
+
+<div th:switch="${products}">
+    <h2 th:case="null">No Products available</h2>
+    <div th:case="*">
+        <h2>Products</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ProdName</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Booking</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.type}"></td>
+                <td th:text="${product.price}"></td>
+                <td><a th:href="@{/booking/{name}(name=${product.name})}">Booking</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/booked">Booked</a></p>
+</div>
+
+</body>
+</html>
