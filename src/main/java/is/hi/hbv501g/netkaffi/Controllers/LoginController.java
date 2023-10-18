@@ -64,7 +64,7 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/loggedinuser", method = RequestMethod.GET)
+    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
     public String loggedinGet(HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if(sessionUser != null) {
