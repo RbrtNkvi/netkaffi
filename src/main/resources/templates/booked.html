@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+
+<div th:switch="${bookings}">
+    <h2 th:case="null">No bookings!</h2>
+    <div th:case="*">
+        <h2>Bookings</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Product name</th>
+                <th>Time</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="b : ${bookings}">
+                <td th:text="${b.user.username}"></td>
+                <td th:text="${b.product.name}"></td>
+                <td th:text="${b.starttime}"></td>
+                <td>
+                    <form action="#" th:action="@{/booked}" method="post" class="inline">
+                        <input type="hidden" th:value="${b.product.name}" name="productName"/>
+                        <input type="hidden" th:value="${b.starttime}" name="starttime"/>
+                        <button type="submit">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="/main">Til baka</a>
+    </div>
+</div>
+
+</body>
+</html>

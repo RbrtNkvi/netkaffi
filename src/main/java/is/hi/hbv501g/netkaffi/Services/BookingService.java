@@ -12,4 +12,5 @@ public interface BookingService {
     List<Booking> findAll();
     Booking save(Booking booking);
     void delete(Booking booking);
+    Booking findByProductAndStarttime(Product product, int starttime);
 }

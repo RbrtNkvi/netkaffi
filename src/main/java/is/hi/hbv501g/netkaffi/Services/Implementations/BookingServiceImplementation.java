@@ -33,4 +33,5 @@ public class BookingServiceImplementation implements BookingService {
     public void delete(Booking booking){
         bookingRepository.delete(booking);
     }
+    public Booking findByProductAndStarttime(Product product, int starttime){ return bookingRepository.findByProductAndStarttime(product,starttime); }
 }
