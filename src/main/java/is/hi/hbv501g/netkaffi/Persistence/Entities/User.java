@@ -11,7 +11,6 @@ public class User {
 
     @Id
     private String username;
-
     private String password;
     private Boolean isadmin;
 
@@ -28,7 +27,6 @@ public class User {
     public User(String name, String password){
         this.username = name;
         this.password = password;
-        this.isadmin = false;
     }
 
     public User() {

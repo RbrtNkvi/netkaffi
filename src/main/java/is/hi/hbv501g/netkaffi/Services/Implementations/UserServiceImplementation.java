@@ -15,12 +15,15 @@ public class UserServiceImplementation implements UserService {
     public UserServiceImplementation(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
+    @Override
     public User save(User user){
+        if (user.getIsAdmin() == null) {
+            user.setIsAdmin(false);
+        }
         userRepository.save(user);
         return user;
     }
-
+    @Override
     public User findByUsername(String username){
        return userRepository.findByUsername(username);
     }
