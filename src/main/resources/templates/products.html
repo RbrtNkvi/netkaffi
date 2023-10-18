@@ -16,6 +16,7 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Price</th>
+                <th>Booking</th>
                 <th>Delete</th>
             </tr>
             </thead>
@@ -25,6 +26,7 @@
                     <td th:text="${product.name}"></td>
                     <td th:text="${product.type}"></td>
                     <td th:text="${product.price}"></td>
+                    <td><a th:href="@{/book/{name}(name=${product.name})}">Book</a></td>
                     <td>
                         <form action="#" th:action="@{/delete/{name}(name=${product.name})}" method="post" class="inline">
                             <button type="submit" name="name" value="name" class="link-button">
@@ -37,8 +39,35 @@
             </tbody>
         </table>
     </div>
+
     <p><a href="/addproduct">Add a new product</a></p>
+
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th colspan="3">Out of service products</th>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <span th:if="${product.deleted == true}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.type}"></td>
+                    <td th:text="${product.price}"></td>
+                </span>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<p><a href="/">Log Out</a></p>
 
 </body>
 </html>
