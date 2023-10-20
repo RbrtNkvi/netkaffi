@@ -11,6 +11,12 @@
   <input type="text" th:field="*{name}" id="name" placeholder="Name">
   <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
   <label for="type">Type</label>
+  <!--<select th:field="${product}">
+    <option th:each="product : ${products}"
+            th:value="${product.type}"
+            th:text="${product.type}"
+            id="type"></option>
+  </select>-->
   <input type="text" th:field="*{type}" id="type" placeholder="Type">
   <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
   <label for="price">Price</label>

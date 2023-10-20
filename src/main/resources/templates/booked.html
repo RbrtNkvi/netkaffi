@@ -36,7 +36,15 @@
             </tr>
             </tbody>
         </table>
-        <a href="/main">Til baka</a>
+        <th:block th:switch="${user.username}">
+            <div th:case="admin">
+                <a href="/products">Til baka</a>
+            </div>
+            <div th:case="*">
+                <a href="/main">Til baka</a>
+            </div>
+        </th:block>
+
     </div>
 </div>
 
