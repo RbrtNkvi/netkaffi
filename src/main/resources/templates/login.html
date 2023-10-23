@@ -7,9 +7,9 @@
 <body>
 <h2>Login to your account</h2>
 <form action="#" th:action="@{/}" th:object="${user}"  method="post">
-    <input type="text" name="username" id="username" th:field="*{username}"/>
-    <input type="password" name="password" id="password" th:value="*{password}"/>
-    <input type="submit" value="Login"/>
+    <p><label for="username">Username</label> <input type="text" name="username" id="username" th:field="*{username}"></p>
+    <p><label for="password">Password</label> <input type="password" name="password" id="password" th:value="*{password}"></p>
+    <input type="submit" value="Login">
 </form>
 
 <p><a href="/signup">Sign Up</a></p>
