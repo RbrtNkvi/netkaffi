@@ -25,7 +25,7 @@ public class LoginController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupPost(User user, BindingResult result, Model model) {
-        if(result.hasErrors()) {
+        if(result.hasErrors() || user.getUsername() == "" || user.getPassword() == "") {
             return "redirect:/signup";
         }
         User exists = userService.findByUsername((user.getUsername()));

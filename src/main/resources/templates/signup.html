@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
-<link rel="stylesheet" href="OurCSS.css">
+    <link rel="stylesheet" th:href="@{/styles/OurCSS.css}">
 </head>
 <body>
 <h2>Signup for an account</h2>
@@ -12,5 +12,6 @@
   <p><label for="password">Password</label> <input type="password" name="password" id="password" th:field="*{password}"></p>
   <input type="submit" value="Sign up">
 </form>
+<p><a href="/">Back to log in</a></p>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>What user is logged in?</title>
-<link rel="stylesheet" href="OurCSS.css">
+    <link rel="stylesheet" th:href="@{/styles/OurCSS.css}">
 </head>
 <body>
 <p th:text="${LoggedInUser.username}"></p>
