@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/styles/OurCSS.css}">
 </head>
 <body>
+<div>
 <h2>Signup for an account</h2>
 <form action="#" th:action="@{/signup}" th:object="${user}" method="post">
   <p><label for="username">Username</label> <input type="text" name="username" id="username" th:field="*{username}"></p>
@@ -13,5 +14,6 @@
   <input type="submit" value="Sign up">
 </form>
 <p><a href="/">Back to log in</a></p>
+</div>
 </body>
 </html>
