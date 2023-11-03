@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-<!--<link rel="stylesheet" href="styles/OurCSS.css" th:href="@{static/OurCSS.css}"/>-->
     <link rel="stylesheet" th:href="@{/styles/OurCSS.css}">
 </head>
 <body>
+<div>
 <h2>Login to your account</h2>
 <form action="#" th:action="@{/}" th:object="${user}"  method="post">
     <p><label for="username">Username</label> <input type="text" name="username" id="username" th:field="*{username}"></p>
     <p><label for="password">Password</label> <input type="password" name="password" id="password" th:value="*{password}"></p>
     <input type="submit" value="Login">
 </form>
-
 <p><a href="/signup">Sign Up</a></p>
+</div>
 </body>
 </html>
