@@ -35,7 +35,7 @@ public class BookedController {
             booked = bookedService.findAllByUser(user);
         }
         model.addAttribute("bookings", booked);
-        model.addAttribute("user", user);
+        model.addAttribute("activeUser", user);
         return "booked";
     }
 
