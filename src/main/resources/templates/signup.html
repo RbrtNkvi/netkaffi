@@ -6,10 +6,10 @@
 </head>
 <body>
 <h2>Signup for an account</h2>
-<form acction="#" th:action="@{/signup}" th:object="${user}" method="post">
-  <input type="text" name="username" id="username" th:field="*{username}"/>
-  <input type="text" name="password" id="password" th:field="*{password}"/>
-  <input type="submit" value="Sign up"/>
+<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+  <p><label for="username">Username</label> <input type="text" name="username" id="username" th:field="*{username}"></p>
+  <p><label for="password">Password</label> <input type="password" name="password" id="password" th:field="*{password}"></p>
+  <input type="submit" value="Sign up">
 </form>
 </body>
 </html>
