@@ -15,13 +15,13 @@ public class Booking {
     private Product product;
 
     @Id
-    private int starttime;
+    private long starttime;
 
     public Booking(){
 
     }
 
-    public Booking(User user, Product product, int starttime){
+    public Booking(User user, Product product, long starttime){
         this.user = user;
         this.product = product;
         this.starttime = starttime;
@@ -43,15 +43,15 @@ public class Booking {
         this.product = product;
     }
 
-    public int getStarttime() {
+    public long getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(int starttime) {
+    public void setStarttime(long starttime) {
         this.starttime = starttime;
     }
 
-    public int getEndtime(){
+    public long getEndtime(){
         return this.starttime+1;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -40,7 +41,7 @@ public class BookedController {
     }
 
     @RequestMapping(value="/booked", method= RequestMethod.POST)
-    public String bookedDelete(@RequestParam String productName,@RequestParam int starttime, Model model){
+    public String bookedDelete(@RequestParam String productName,@RequestParam long starttime, Model model){
         Product product = productService.findByName(productName);
         Booking booking = bookedService.findByProductAndStarttime(product,starttime);
         bookedService.delete(booking);
