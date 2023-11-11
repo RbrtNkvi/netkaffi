@@ -23,7 +23,7 @@
             <tr th:each="b : ${bookings}">
                 <td th:text="${b.user.username}"></td>
                 <td th:text="${b.product.name}"></td>
-                <td th:text="${b.starttime}"></td>
+                <td th:text="${#dates.format(new java.util.Date(b.starttime), 'dd/MM/yyyy')}"></td>
                 <td>
                     <form action="#" th:action="@{/booked}" method="post" class="inline">
                         <input type="hidden" th:value="${b.product.name}" name="productName"/>
