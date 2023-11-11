@@ -37,11 +37,11 @@
             </tr>
             </tbody>
         </table>
-        <th:block th:switch="${user.username}">
-            <div th:case="admin">
+        <th:block th:switch="${activeUser.isAdmin}">
+            <div th:case="true">
                 <a href="/products">Til baka</a>
             </div>
-            <div th:case="*">
+            <div th:case="false">
                 <a href="/main">Til baka</a>
             </div>
         </th:block>
