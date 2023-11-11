@@ -26,19 +26,32 @@
                     <td th:text="${p.type}"></td>
                     <td th:text="${p.price}"></td>
                 </span>
-                <form action="#" th:action="@{/book/{pname}(pname=${p.name})}" method="post" >
-                    <label for="time">Hour:</label>
-                    <select id="time" name="starttime" th:value="${starttime}">
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                    </select>
-                    <input type="submit">
-                </form>
             </tr>
             </tbody>
         </table>
+        <form action="#" th:action="@{/book/{pname}(pname=${product.name})}" method="post">
+            <label for="date">Day</label>
+            <input type="date" id="date" name="startdate" th:value="${startday}" min="2023-11-13"
+                   max="2023-11-26" required>
+            <label for="time">Hour:</label>
+            <select id="time" name="starthour" th:value="${starthour}">
+                <option value="10">10:00</option>
+                <option value="11">11:00</option>
+                <option value="12">12:00</option>
+                <option value="13">13:00</option>
+                <option value="14">14:00</option>
+                <option value="15">15:00</option>
+                <option value="16">16:00</option>
+                <option value="17">17:00</option>
+                <option value="18">18:00</option>
+                <option value="19">19:00</option>
+                <option value="20">20:00</option>
+                <option value="21">21:00</option>
+                <option value="22">22:00</option>
+                <option value="23">23:00</option>
+            </select>
+            <input type="submit" value="Submit Booking">
+        </form>
     </div>
 </div>
 

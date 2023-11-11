@@ -8,12 +8,12 @@ public class BookingId implements Serializable {
 
     private Product product;
 
-    private int starttime;
+    private long starttime;
 
     public BookingId(){
 
     }
-    public BookingId(User user, Product product, int starttime) {
+    public BookingId(User user, Product product, long starttime) {
         this.user = user;
         this.product = product;
         this.starttime = starttime;
@@ -35,11 +35,11 @@ public class BookingId implements Serializable {
         this.product = product;
     }
 
-    public int getStarttime() {
+    public long getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(int starttime) {
+    public void setStarttime(long starttime) {
         this.starttime = starttime;
     }
 

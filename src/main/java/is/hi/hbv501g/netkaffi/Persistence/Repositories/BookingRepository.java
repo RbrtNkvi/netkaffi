@@ -14,5 +14,5 @@ public interface BookingRepository extends JpaRepository<Booking, BookingId> {
     List<Booking> findAll();
     Booking save(Booking booking);
     void delete(Booking booking);
-    Booking findByProductAndStarttime(Product product, int starttime);
+    Booking findByProductAndStarttime(Product product, long starttime);
 }
