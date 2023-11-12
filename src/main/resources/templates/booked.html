@@ -16,12 +16,13 @@
             <tr>
                 <th>User</th>
                 <th>Product name</th>
-                <th>Time</th>
+                <th>Date</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="b : ${bookings}">
+                <span th:if="${dateSearch == null || #dates.format(dateSearch, 'yyyy-MM-dd') == #dates.format(new java.util.Date(b.starttime), 'yyyy-MM-dd')}">
                 <td th:text="${b.user.username}"></td>
                 <td th:text="${b.product.name}"></td>
                 <td th:text="${#dates.format(new java.util.Date(b.starttime), 'dd/MM/yyyy')}"></td>
@@ -34,9 +35,17 @@
                         </button>
                     </form>
                 </td>
+                </span>
             </tr>
             </tbody>
         </table>
+        <form action="#" th:action="@{/booked/search}" method="post">
+            <input type="date" id="date" name="startdate" th:value="${startday}" required>
+            <input type="submit" value="Search">
+        </form>
+        <a href="/booked" >
+            <button>Reset</button>
+        </a>
         <th:block th:switch="${activeUser.isAdmin}">
             <div th:case="true">
                 <a href="/products">Til baka</a>

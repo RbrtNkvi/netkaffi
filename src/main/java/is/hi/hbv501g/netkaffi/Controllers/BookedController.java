@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -29,6 +29,7 @@ public class BookedController {
     @RequestMapping(value="/booked", method= RequestMethod.GET)
     public String bookedGet(HttpSession session, Model model){
         User user = (User) session.getAttribute("LoggedInUser");
+        Date date = (Date) session.getAttribute("dateSearch");
         List<Booking> booked;
         if(user.getIsAdmin()){
             booked = bookedService.findAll();
@@ -37,7 +38,15 @@ public class BookedController {
         }
         model.addAttribute("bookings", booked);
         model.addAttribute("activeUser", user);
+        model.addAttribute("dateSearch", date);
+        session.setAttribute("dateSearch", null);
         return "booked";
+    }
+
+    @RequestMapping(value="/booked/search", method= RequestMethod.POST)
+    public String bookedSearch(@RequestParam Date startdate, Model model, HttpSession session){
+        session.setAttribute("dateSearch", startdate);
+        return "redirect:/booked";
     }
 
     @RequestMapping(value="/booked", method= RequestMethod.POST)
