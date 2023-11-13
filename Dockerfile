@@ -1,7 +1,7 @@
 #
 # Build stage
 #
-FROM maven:4.0.0-jdk-20 AS build
+FROM maven:3.9.5-jdk-20 AS build
 COPY . .
 RUN mvn clean package -Pprod -DskipTests
 
