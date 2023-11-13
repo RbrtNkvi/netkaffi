@@ -48,13 +48,12 @@
         </a>
         <th:block th:switch="${activeUser.isAdmin}">
             <div th:case="true">
-                <a href="/products">Til baka</a>
+                <a href="/products">Back to main</a>
             </div>
             <div th:case="false">
-                <a href="/main">Til baka</a>
+                <a href="/main">Back to main</a>
             </div>
         </th:block>
-
     </div>
 </div>
 
