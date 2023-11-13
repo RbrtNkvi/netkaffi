@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{/styles/OurCSS.css}">
 </head>
 <body>
-
+<div>
 <div th:switch="${product}">
     <h2 th:case="null">No product!</h2>
     <div th:case="*">
@@ -54,6 +54,14 @@
         </form>
     </div>
 </div>
-
+    <th:block th:switch="${activeUser.isAdmin}">
+        <div th:case="true">
+            <a href="/products">Back to main</a>
+        </div>
+        <div th:case="false">
+            <a href="/main">Back to main</a>
+        </div>
+    </th:block>
+</div>
 </body>
 </html>
