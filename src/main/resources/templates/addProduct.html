@@ -6,7 +6,7 @@
   <link rel="stylesheet" th:href="@{/styles/OurCSS.css}">
 </head>
 <body>
-
+<div>
 <form action="#" th:action="@{/addproduct}" th:object="${product}" method="post">
   <p><label for="name">Name</label>
   <input type="text" th:field="*{name}" id="name" placeholder="Name">
@@ -25,6 +25,14 @@
   <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></p>
   <input type="submit" value="Add Product">
 </form>
-
+<th:block th:switch="${activeUser.isAdmin}">
+  <div th:case="true">
+    <a href="/products">Back to main</a>
+  </div>
+  <div th:case="false">
+    <a href="/main">Back to main</a>
+  </div>
+</th:block>
+</div>
 </body>
 </html>
