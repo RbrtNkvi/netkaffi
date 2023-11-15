@@ -21,24 +21,21 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="b : ${bookings}">
-                <span th:if="${dateSearch == null || #dates.format(dateSearch, 'yyyy-MM-dd') == #dates.format(new java.util.Date(b.starttime), 'yyyy-MM-dd')}">
+            <th:block th:each="b : ${bookings}"><tr th:if="${dateSearch == null || #dates.format(dateSearch, 'yyyy-MM-dd') == #dates.format(new java.util.Date(b.starttime), 'yyyy-MM-dd')}">
                 <td th:text="${b.user.username}"></td>
                 <td th:text="${b.product.name}"></td>
                 <td th:text="${#dates.format(new java.util.Date(b.starttime), 'dd/MM/yyyy')}"></td>
                 <td>
                     <form action="#" th:action="@{/booked}" method="post" class="inline">
-                        <input type="hidden" th:value="${b.product.name}" name="productName"/>
-                        <input type="hidden" th:value="${b.starttime}" name="starttime"/>
-                        <button type="submit">
-                            Delete
-                        </button>
+                        <input type="hidden" th:value="${b.product.name}" name="productName">
+                        <input type="hidden" th:value="${b.starttime}" name="starttime">
+                        <input type="submit" value="Delete">
                     </form>
                 </td>
-                </span>
-            </tr>
+            </tr></th:block>
             </tbody>
         </table>
+        <br>
         <form action="#" th:action="@{/booked/search}" method="post">
             <input type="date" id="date" name="startdate" th:value="${startday}" required>
             <input type="submit" value="Search">
@@ -47,14 +44,9 @@
             <button>Reset</button>
         </a>
         <th:block th:switch="${activeUser.isAdmin}">
-            <div th:case="true">
-                <a href="/products">Til baka</a>
-            </div>
-            <div th:case="false">
-                <a href="/main">Til baka</a>
-            </div>
+            <p th:case="true"><a href="/products">Back to main</a></p>
+            <p th:case="false"><a href="/main">Back to main</a></p>
         </th:block>
-
     </div>
 </div>
 
