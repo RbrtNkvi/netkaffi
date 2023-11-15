@@ -39,20 +39,16 @@
             </tr>
             </tbody>
         </table>
-        <form action="#" th:action="@{/booked/search}" method="post">
+        <p><form action="#" th:action="@{/booked/search}" method="post">
             <input type="date" id="date" name="startdate" th:value="${startday}" required>
             <input type="submit" value="Search">
         </form>
         <a href="/booked" >
             <button>Reset</button>
-        </a>
+        </a></p>
         <th:block th:switch="${activeUser.isAdmin}">
-            <div th:case="true">
-                <a href="/products">Back to main</a>
-            </div>
-            <div th:case="false">
-                <a href="/main">Back to main</a>
-            </div>
+            <p th:case="true"><a href="/products">Back to main</a></p>
+            <p th:case="false"><a href="/main">Back to main</a></p>
         </th:block>
     </div>
 </div>
