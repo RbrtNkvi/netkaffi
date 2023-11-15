@@ -3,3 +3,7 @@ body
 	display: flex;
 	justify-content: center;
 }
+td, th
+{
+	padding: 2px 2px 2px 2px;
+}
