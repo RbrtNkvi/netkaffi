@@ -20,16 +20,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="p : ${product}">
-                <span th:if="${p.deleted == false}">
-                    <td th:text="${p.name}"></td>
-                    <td th:text="${p.type}"></td>
-                    <td th:text="${p.price}"></td>
-                </span>
-            </tr>
+            <th:block th:each="p : ${product}"><tr th:if="${p.deleted == false}">
+                <td th:text="${p.name}"></td>
+                <td th:text="${p.type}"></td>
+                <td th:text="${p.price}"></td>
+            </tr></th:block>
             </tbody>
         </table>
-        <p><form action="#" th:action="@{/book/{pname}(pname=${product.name})}" method="post">
+        <br>
+        <form action="#" th:action="@{/book/{pname}(pname=${product.name})}" method="post">
             <label for="date">Day</label>
             <input type="date" id="date" name="startdate" th:value="${startday}" min="2023-11-13"
                    max="2023-11-26" required>
@@ -51,16 +50,12 @@
                 <option value="23">23:00</option>
             </select>
             <input type="submit" value="Submit Booking">
-        </form></p>
+        </form>
     </div>
 </div>
     <th:block th:switch="${activeUser.isAdmin}">
-        <p th:case="true">
-            <a href="/products">Back to main</a>
-        </p>
-        <p th:case="false">
-            <a href="/main">Back to main</a>
-        </p>
+        <p th:case="true"><a href="/products">Back to main</a></p>
+        <p th:case="false"><a href="/main">Back to main</a></p>
     </th:block>
 </div>
 </body>
