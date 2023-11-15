@@ -30,9 +30,11 @@ public class BookingController {
     }
 
     @RequestMapping(value="/book/{product}", method = RequestMethod.GET)
-    public String productGet(@PathVariable String product, Model model){
+    public String productGet(@PathVariable String product, Model model, HttpSession session){
         Product p = productService.findByName(product);
+        User user = (User) session.getAttribute("LoggedInUser");
         model.addAttribute("product", p);
+        model.addAttribute("activeUser", user);
         return "booking";
     }
 
