@@ -22,8 +22,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product : ${products}">
-                <span th:if="${product.deleted == false}">
+            <th:block th:each="product : ${products}">
+                <tr th:if="${product.deleted == false}">
                     <td th:text="${product.name}"></td>
                     <td th:text="${product.type}"></td>
                     <td th:text="${product.price}"></td>
@@ -35,8 +35,8 @@
                             </button>
                         </form>
                     </td>
-                </span>
-            </tr>
+                </tr>
+            </th:block>
             </tbody>
         </table>
     </div>
