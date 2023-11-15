@@ -29,9 +29,7 @@
                     <form action="#" th:action="@{/booked}" method="post" class="inline">
                         <input type="hidden" th:value="${b.product.name}" name="productName">
                         <input type="hidden" th:value="${b.starttime}" name="starttime">
-                        <button type="submit">
-                            Delete
-                        </button>
+                        <input type="submit" value="Delete">
                     </form>
                 </td>
             </tr></th:block>
