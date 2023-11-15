@@ -21,22 +21,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="b : ${bookings}">
-                <span th:if="${dateSearch == null || #dates.format(dateSearch, 'yyyy-MM-dd') == #dates.format(new java.util.Date(b.starttime), 'yyyy-MM-dd')}">
+            <th:block th:each="b : ${bookings}"><tr th:if="${dateSearch == null || #dates.format(dateSearch, 'yyyy-MM-dd') == #dates.format(new java.util.Date(b.starttime), 'yyyy-MM-dd')}">
                 <td th:text="${b.user.username}"></td>
                 <td th:text="${b.product.name}"></td>
                 <td th:text="${#dates.format(new java.util.Date(b.starttime), 'dd/MM/yyyy')}"></td>
                 <td>
                     <form action="#" th:action="@{/booked}" method="post" class="inline">
-                        <input type="hidden" th:value="${b.product.name}" name="productName"/>
-                        <input type="hidden" th:value="${b.starttime}" name="starttime"/>
+                        <input type="hidden" th:value="${b.product.name}" name="productName">
+                        <input type="hidden" th:value="${b.starttime}" name="starttime">
                         <button type="submit">
                             Delete
                         </button>
                     </form>
                 </td>
-                </span>
-            </tr>
+            </tr></th:block>
             </tbody>
         </table>
         <p><form action="#" th:action="@{/booked/search}" method="post">
