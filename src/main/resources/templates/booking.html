@@ -29,7 +29,7 @@
             </tr>
             </tbody>
         </table>
-        <form action="#" th:action="@{/book/{pname}(pname=${product.name})}" method="post">
+        <p><form action="#" th:action="@{/book/{pname}(pname=${product.name})}" method="post">
             <label for="date">Day</label>
             <input type="date" id="date" name="startdate" th:value="${startday}" min="2023-11-13"
                    max="2023-11-26" required>
@@ -51,16 +51,16 @@
                 <option value="23">23:00</option>
             </select>
             <input type="submit" value="Submit Booking">
-        </form>
+        </form></p>
     </div>
 </div>
     <th:block th:switch="${activeUser.isAdmin}">
-        <div th:case="true">
+        <p th:case="true">
             <a href="/products">Back to main</a>
-        </div>
-        <div th:case="false">
+        </p>
+        <p th:case="false">
             <a href="/main">Back to main</a>
-        </div>
+        </p>
     </th:block>
 </div>
 </body>
