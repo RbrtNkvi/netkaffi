@@ -22,21 +22,19 @@
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="product : ${products}">
-                <tr th:if="${product.deleted == false}">
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.type}"></td>
-                    <td th:text="${product.price}"></td>
-                    <td><a th:href="@{/book/{name}(name=${product.name})}">Book</a></td>
-                    <td>
-                        <form action="#" th:action="@{/delete/{name}(name=${product.name})}" method="post" class="inline">
-                            <button type="submit" name="name" value="name" class="link-button">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            </th:block>
+            <th:block th:each="product : ${products}"><tr th:if="${product.deleted == false}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.type}"></td>
+                <td th:text="${product.price}"></td>
+                <td><a th:href="@{/book/{name}(name=${product.name})}">Book</a></td>
+                <td>
+                    <form action="#" th:action="@{/delete/{name}(name=${product.name})}" method="post" class="inline">
+                        <button type="submit" name="name" value="name" class="link-button">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr></th:block>
             </tbody>
         </table>
     </div>
@@ -57,13 +55,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product : ${products}">
-                <span th:if="${product.deleted == true}">
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.type}"></td>
-                    <td th:text="${product.price}"></td>
-                </span>
-            </tr>
+            <th:block th:each="product : ${products}"><tr th:if="${product.deleted == true}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.type}"></td>
+                <td th:text="${product.price}"></td>
+                </tr></th:block>
             </tbody>
         </table>
     </div>
