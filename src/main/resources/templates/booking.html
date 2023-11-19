@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title>Booking</title>
     <link rel="stylesheet" th:href="@{/styles/OurCSS.css}">
 </head>
 <body>
@@ -10,7 +10,7 @@
 <div th:switch="${product}">
     <h2 th:case="null">No product!</h2>
     <div th:case="*">
-        <h2>Products</h2>
+        <h2>Booking</h2>
         <table>
             <thead>
             <tr>
