@@ -19,6 +19,14 @@ public class HomeController {
     public HomeController(ProductService productService){
         this.productService = productService;
     }
+
+    /**
+     * Fetching the products for use in main.html
+     *
+     * @param product
+     * @param model
+     * @return direction to main.html with products information
+     */
     @RequestMapping(value="/main", method = RequestMethod.GET)
     public String productsGet(Product product, Model model) {
         List<Product> allProducts = productService.findAll();

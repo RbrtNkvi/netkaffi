@@ -26,6 +26,15 @@ public class BookedController {
         this.productService = productService;
     }
 
+    /**
+     * Fetches session attributes of user & date for use in booked.html,
+     * fetches past and current bookings and saves relevant bookings
+     * depending on whether user is an admin or not for use with booked.html
+     *
+     * @param session
+     * @param model
+     * @return direction to booked.html with relevant session & booked information
+     */
     @RequestMapping(value="/booked", method= RequestMethod.GET)
     public String bookedGet(HttpSession session, Model model){
         User user = (User) session.getAttribute("LoggedInUser");
@@ -43,12 +52,28 @@ public class BookedController {
         return "booked";
     }
 
+    /**
+     * Fetching bookings that have the datetime which equals the startdate
+     *
+     * @param startdate the datetime which the bookings belong to
+     * @param model
+     * @param session
+     * @return redirect to booked with only relevant bookings
+     */
     @RequestMapping(value="/booked/search", method= RequestMethod.POST)
     public String bookedSearch(@RequestParam Date startdate, Model model, HttpSession session){
         session.setAttribute("dateSearch", startdate);
         return "redirect:/booked";
     }
 
+    /**
+     * Deletion of a specific booking
+     *
+     * @param productName name of the product belonging to the booking
+     * @param starttime unix-timestamp of booking
+     * @param model
+     * @return redirect to booked
+     */
     @RequestMapping(value="/booked", method= RequestMethod.POST)
     public String bookedDelete(@RequestParam String productName,@RequestParam long starttime, Model model){
         Product product = productService.findByName(productName);

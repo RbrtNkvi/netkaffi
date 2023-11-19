@@ -23,6 +23,14 @@ public class LoginController {
         return "signup";
     }
 
+    /**
+     * Creates new user
+     *
+     * @param user new user information
+     * @param result
+     * @param model
+     * @return redirect to login.html
+     */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupPost(User user, BindingResult result, Model model) {
         if(result.hasErrors() || user.getUsername() == "" || user.getPassword() == "") {
@@ -42,6 +50,15 @@ public class LoginController {
         return "user";
     }
 
+    /**
+     * Verifies user exists and logs them in
+     *
+     * @param user user information
+     * @param result
+     * @param model
+     * @param session
+     * @return redirect to main.html or product.html depending on if user is an admin
+     */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String loginPost(User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
@@ -64,6 +81,13 @@ public class LoginController {
         return "login";
     }
 
+    /**
+     * Fetches information about which user is logged in
+     *
+     * @param session
+     * @param model
+     * @return redirect to loggedInUser.html
+     */
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
     public String loggedinGet(HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
