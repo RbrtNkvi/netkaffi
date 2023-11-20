@@ -33,6 +33,9 @@ public class BookingController {
     public String productGet(@PathVariable String product, Model model, HttpSession session){
         Product p = productService.findByName(product);
         User user = (User) session.getAttribute("LoggedInUser");
+        if( Errors.checkUser(user) == 0 ){
+            return "redirect:/";
+        }
         model.addAttribute("product", p);
         model.addAttribute("activeUser", user);
         return "booking";
@@ -40,19 +43,32 @@ public class BookingController {
 
     @RequestMapping(value="/book/{product}", method = RequestMethod.POST)
     public String bookingPost(@PathVariable String product, @RequestParam String starthour, @RequestParam Date startdate, Model model, HttpSession session){
-        Product p = productService.findByName(product);
         User user = (User) session.getAttribute("LoggedInUser");
-        int st = Integer.parseInt(starthour);
-        long timestamp = startdate.getTime();
-        timestamp += 3600000*st;
-        if (bookingService.findByProductAndStarttime(p,timestamp) != null) {
+        if( Errors.checkUser(user) == 0 ){
+            return "redirect:/";
+        }
+        try {
+            Product p = productService.findByName(product);
+            if( startdate == null ){
+                return "redirect:/book/" + product;
+            }
+            int st = Integer.parseInt(starthour);
+            long timestamp = startdate.getTime();
+            timestamp += 3600000*st;
+            if (bookingService.findByProductAndStarttime(p,timestamp) != null) {
+                return "redirect:/book/" + product;
+            }
+            Booking b = new Booking(user,p,timestamp);
+            Booking exists = bookingService.save(b);
+            if(exists != null){
+                return "redirect:/booked";
+            }
             return "redirect:/book/" + product;
+        } catch(Exception e){
+            if( user.getIsAdmin() ){
+                return "redirect:/products";
+            }
+            return "redirect:/main";
         }
-        Booking b = new Booking(user,p,timestamp);
-        Booking exists = bookingService.save(b);
-        if(exists != null){
-            return "redirect:/booked";
-        }
-        return "redirect:/book/" + product;
     }
 }

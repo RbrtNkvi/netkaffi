@@ -1,6 +1,7 @@
 package is.hi.hbv501g.netkaffi.Controllers;
 
 import is.hi.hbv501g.netkaffi.Persistence.Entities.Product;
+import is.hi.hbv501g.netkaffi.Persistence.Entities.User;
 import is.hi.hbv501g.netkaffi.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import jakarta.servlet.http.HttpSession;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -24,30 +26,62 @@ public class ProductController {
     }
 
     @RequestMapping(value="/products", method = RequestMethod.GET)
-    public String productsGet(Product product, Model model){
+    public String productsGet(Product product, Model model, HttpSession session){
+        User user = (User) session.getAttribute("LoggedInUser");
+        if( Errors.checkUser(user) == 0 ){
+            return "redirect:/";
+        }
+        if( !user.getIsAdmin() ){
+            return "redirect:/main";
+        }
         List<Product> allProducts = productService.findAll();
         model.addAttribute("products", allProducts);
         return "products";
     }
 
     @RequestMapping(value="/addproduct", method = RequestMethod.GET)
-    public String addProductGet(Product product){
-        return "addProduct";
+    public String addProductGet(Product product, HttpSession session){
+        User user = (User) session.getAttribute("LoggedInUser");
+        if( Errors.checkUser(user) == 0 ){
+            return "redirect:/";
+        }
+        if( user.getIsAdmin() ) {
+            return "addProduct";
+        } else {
+            return "redirect:/main";
+        }
     }
 
     @RequestMapping(value="/addproduct", method = RequestMethod.POST)
     public String addProductPost(Product product, BindingResult result, Model model){
-        if(result.hasErrors()){
-            return "newBook";
+        if( product.getName() == null || product.getName().isEmpty() ) {
+            return "redirect:/addproduct";
+        }
+        if( product.getType() == null || product.getType().isEmpty() ) {
+            return "redirect:/addproduct";
+        }
+        if( product.getPrice() <= 0 ) {
+            return "redirect:/addproduct";
         }
         productService.save(product);
         return "redirect:/products";
     }
 
     @RequestMapping(value="/delete/{name}", method = RequestMethod.POST)
-    public String productDelete(@PathVariable("name") String name, Model model){
-        Product productToDelete = productService.findByName(name);
-        productService.edit(productToDelete);
-        return "redirect:/products";
+    public String productDelete(@PathVariable("name") String name, Model model, HttpSession session){
+        User user = (User) session.getAttribute("LoggedInUser");
+        if( Errors.checkUser(user) == 0 ){
+            return "redirect:/";
+        }
+        if( !user.getIsAdmin() ){
+            return "redirect:/main";
+        }
+        try {
+            Product productToDelete = productService.findByName(name);
+            productService.edit(productToDelete);
+            return "redirect:/products";
+        } catch(Exception e) {
+            return "redirect:/products";
+        }
     }
 }

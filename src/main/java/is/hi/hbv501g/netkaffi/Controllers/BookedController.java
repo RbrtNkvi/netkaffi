@@ -29,6 +29,9 @@ public class BookedController {
     @RequestMapping(value="/booked", method= RequestMethod.GET)
     public String bookedGet(HttpSession session, Model model){
         User user = (User) session.getAttribute("LoggedInUser");
+        if( Errors.checkUser(user) == 0 ){
+            return "redirect:/";
+        }
         Date date = (Date) session.getAttribute("dateSearch");
         List<Booking> booked;
         if(user.getIsAdmin()){
@@ -51,9 +54,13 @@ public class BookedController {
 
     @RequestMapping(value="/booked", method= RequestMethod.POST)
     public String bookedDelete(@RequestParam String productName,@RequestParam long starttime, Model model){
-        Product product = productService.findByName(productName);
-        Booking booking = bookedService.findByProductAndStarttime(product,starttime);
-        bookedService.delete(booking);
-        return "redirect:/booked";
+        try {
+            Product product = productService.findByName(productName);
+            Booking booking = bookedService.findByProductAndStarttime(product, starttime);
+            bookedService.delete(booking);
+            return "redirect:/booked";
+        } catch(Exception e) {
+            return "redirect:/booked";
+        }
     }
 }
