@@ -29,6 +29,15 @@ public class BookingController {
         this.productService = productService;
     }
 
+    /**
+     * Fetches booking information for a specific product,
+     * fetches session attributes of user
+     *
+     * @param product which is being booked
+     * @param model
+     * @param session
+     * @return direction to booking.html with information for product
+     */
     @RequestMapping(value="/book/{product}", method = RequestMethod.GET)
     public String productGet(@PathVariable String product, Model model, HttpSession session){
         Product p = productService.findByName(product);
@@ -38,12 +47,23 @@ public class BookingController {
         return "booking";
     }
 
+    /**
+     * Creates a new booking and inserts it into the PSQL database
+     *
+     * @param product which is being booked
+     * @param starthour the hour that is being booked
+     * @param startdate the date that is being booked
+     * @param model
+     * @param session
+     * @return redirect to booked.html
+     */
     @RequestMapping(value="/book/{product}", method = RequestMethod.POST)
     public String bookingPost(@PathVariable String product, @RequestParam String starthour, @RequestParam Date startdate, Model model, HttpSession session){
         Product p = productService.findByName(product);
         User user = (User) session.getAttribute("LoggedInUser");
         int st = Integer.parseInt(starthour);
         long timestamp = startdate.getTime();
+        //timestamp converted to hours
         timestamp += 3600000*st;
         if (bookingService.findByProductAndStarttime(p,timestamp) != null) {
             return "redirect:/book/" + product;
