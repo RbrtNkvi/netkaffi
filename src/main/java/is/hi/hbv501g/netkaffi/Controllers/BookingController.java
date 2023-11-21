@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Controller
 public class BookingController {
@@ -71,9 +72,17 @@ public class BookingController {
             if( startdate == null ){
                 return "redirect:/book/" + product;
             }
+            Calendar calendar = Calendar.getInstance();
+            long today = calendar.getTimeInMillis();
+
             int st = Integer.parseInt(starthour);
             long timestamp = startdate.getTime();
             timestamp += 3600000*st;
+
+            if( timestamp < today ){
+                return "redirect:/book/" + product;
+            }
+
             if (bookingService.findByProductAndStarttime(p,timestamp) != null) {
                 return "redirect:/book/" + product;
             }

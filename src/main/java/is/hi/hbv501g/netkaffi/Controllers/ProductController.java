@@ -79,8 +79,12 @@ public class ProductController {
         if( product.getPrice() <= 0 ) {
             return "redirect:/addproduct";
         }
-        productService.save(product);
-        return "redirect:/products";
+        try {
+            productService.save(product);
+            return "redirect:/products";
+        } catch(Exception e){
+            return "redirect:/addproduct";
+        }
     }
 
     /**
