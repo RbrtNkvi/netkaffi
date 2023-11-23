@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -94,7 +95,13 @@ public class BookedController {
                 if(!booking.getUser().getUsername().equals(user.getUsername()) || !booking.getUser().getPassword().equals(user.getPassword()) ){
                     return "redirect:/booked";
                 }
+                Calendar calendar = Calendar.getInstance();
+                long today = calendar.getTimeInMillis();
+                if (starttime < today) {
+                    return "redirect:/booked";
+                }
             }
+
             bookedService.delete(booking);
             return "redirect:/booked";
         } catch(Exception e) {
