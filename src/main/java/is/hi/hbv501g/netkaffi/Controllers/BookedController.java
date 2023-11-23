@@ -90,8 +90,10 @@ public class BookedController {
             }
             Product product = productService.findByName(productName);
             Booking booking = bookedService.findByProductAndStarttime(product, starttime);
-            if( booking.getUser() != user && !user.getIsAdmin() ){
-                return "redirect:/booked";
+            if(!user.getIsAdmin()){
+                if(!booking.getUser().getUsername().equals(user.getUsername()) || !booking.getUser().getPassword().equals(user.getPassword()) ){
+                    return "redirect:/booked";
+                }
             }
             bookedService.delete(booking);
             return "redirect:/booked";

@@ -77,7 +77,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginGet(User user){
+    public String loginGet(User user, HttpSession session){
+        session.setAttribute("LoggedInUser", null);
         return "login";
     }
 

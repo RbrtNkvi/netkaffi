@@ -34,7 +34,7 @@ public class HomeController {
     public String productsGet(Product product, Model model, HttpSession session) {
         User user = (User) session.getAttribute("LoggedInUser");
         if( Errors.checkUser(user) == 0 ){
-            return "redirect:/login";
+            return "redirect:/";
         }
         List<Product> allProducts = productService.findAll();
         model.addAttribute("products", allProducts);
